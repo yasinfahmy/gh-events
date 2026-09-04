@@ -2,7 +2,16 @@ name: Events Demo 1
 on:
   pull_request:
     types: [opened, edited] #specify activity types of event
+    branches: #if pull request targets on eof these branches
+      main 
   workflow_dispatch: #Specify an event without types like this
+  push: #Only pushes to main branch should trigger deployment
+    branches: #branches-ignore to activate for all but exceptions
+      - main
+      - 'dev-*' #Allows for varying number of chars after - except slashes
+      - 'feat/**' #Allows for several slashes after /
+    paths-ignore: #Run a workflow if a push or pull request changes files in a specific path
+      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
