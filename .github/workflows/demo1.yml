@@ -1,5 +1,8 @@
 name: Events Demo 1
-on: ...
+on:
+  pull_request:
+    types: [opened, edited] #specify activity types of event
+  workflow_dispatch: #Specify an event without types like this
 jobs:
   deploy:
     runs-on: ubuntu-latest
